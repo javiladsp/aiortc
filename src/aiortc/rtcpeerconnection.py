@@ -475,7 +475,7 @@ class RTCPeerConnection(AsyncIOEventEmitter):
             direction=direction, kind=kind, sender_track=track
         )
 
-    async def close(self):
+    async def close(self) -> None:
         """
         Terminate the ICE agent, ending ICE processing and streams.
         """
@@ -510,7 +510,7 @@ class RTCPeerConnection(AsyncIOEventEmitter):
 
         self.__isClosed.set_result(True)
 
-    async def createAnswer(self):
+    async def createAnswer(self) -> RTCSessionDescription:
         """
         Create an SDP answer to an offer received from a remote peer during
         the offer/answer negotiation of a WebRTC connection.
@@ -575,7 +575,7 @@ class RTCPeerConnection(AsyncIOEventEmitter):
         protocol="",
         negotiated=False,
         id=None,
-    ):
+    ) -> RTCDataChannel:
         """
         Create a data channel with the given label.
 

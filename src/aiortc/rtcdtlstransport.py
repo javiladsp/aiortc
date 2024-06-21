@@ -45,7 +45,7 @@ class SRTPProtectionProfile:
     key_length: int
     salt_length: int
 
-    def get_key_and_salt(self, src, idx: int) -> bytes:
+    def get_key_and_salt(self, src: bytes, idx: int) -> bytes:
         key_start = idx * self.key_length
         salt_start = 2 * self.key_length + idx * self.salt_length
         return (
@@ -187,7 +187,7 @@ class RTCCertificate:
     ) -> SSL.Context:
         ctx = SSL.Context(SSL.DTLS_METHOD)
         ctx.set_verify(
-            SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT, lambda *args: 1
+            SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT, lambda *args: True
         )
         ctx.use_certificate(self._cert)
         ctx.use_privatekey(self._key)
